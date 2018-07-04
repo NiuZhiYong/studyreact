@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import ThemeSwitch from './themeSwitch'
 import {connect} from './react-redux'
 
-class Content extends Component {
-    static propTypes = {
+export default class Content extends Component {
+    static contextTypes = {
         store:PropTypes.object
     }
     constructor(){
@@ -14,7 +14,9 @@ class Content extends Component {
         }
     }
     componentWillMount(){
-        this._updateThemeColor()
+        const {store} = this.context;
+        this._updateThemeColor();
+        store.subscribe(() => this._updateThemeColor())
     }
     _updateThemeColor(){
         const {store} = this.context;

@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
-class Header extends Component {
+export default class Header extends Component {
     static contextTypes = {
         store:PropTypes.object
     }
@@ -13,7 +13,9 @@ class Header extends Component {
         }
     }
     componentWillMount(){
-        this._updateThemeColor()
+        const {store} = this.context;
+        this._updateThemeColor();
+        store.subscribe(() => this._updateThemeColor())
     }
     _updateThemeColor(){
         const {store} = this.context;
