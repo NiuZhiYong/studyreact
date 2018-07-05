@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/Header'
-import Content from './components/Content'
+import Header from './containers/Header'
+import Content from './containers/Content'
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from './react-redux';
