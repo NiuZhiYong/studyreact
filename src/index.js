@@ -4,7 +4,7 @@ import Header from './Header'
 import Content from './Content'
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-//import {Provider} from 'react-redux';
+import {Provider} from './react-redux';
 //import {createStore} from 'redux';
 import PropTypes from 'prop-types';
  
@@ -36,12 +36,6 @@ const themeReducer = (state,action) => {
 const store = createStore(themeReducer)
 
 class Index extends Component{
-    static childContextTypes = {
-        store:PropTypes.object
-    }
-    getChildContext(){
-        return {store}
-    }
     render(){
         return (
             <div>
@@ -52,7 +46,9 @@ class Index extends Component{
     }
 }
 ReactDOM.render(
-                <Index />,
+                <Provider store = {store}>
+                    <Index />
+                </Provider>,    
                 document.getElementById('root')
             );
 registerServiceWorker();
