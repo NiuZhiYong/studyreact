@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import {Provider} from './react-redux';
 //import {createStore} from 'redux';
 import PropTypes from 'prop-types';
+import config from './config'
  
 function createStore(reducer){
     let state = null;
@@ -37,6 +38,7 @@ const store = createStore(themeReducer)
 
 class Index extends Component{
     render(){
+        console.log(config)
         return (
             <div>
                 <Header />
