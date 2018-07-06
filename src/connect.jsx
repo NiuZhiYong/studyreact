@@ -6,11 +6,36 @@ export const connect = (mapStateToProps) => (WrappedComponent) => {
         static contextTypes = {
             store:PropTypes.object
         }
-        render(){
+        constructor(){
+            super();
+            this.state = {
+                allProps:{}
+            }
+        }
+        componentWillMount(){
             const {store} = this.context;
-            let stateProps = mapStateToProps(store.getState())
+            this._updateThemeColor()
+            store.subscribe(() => this._updateThemeColor)
+        }
+        _updateThemeColor(){
+            const {store} = this.context;
+            let stateProps = mapStateToProps
+            ?mapStateToProps(store.getState(),this.props)
+            :{}
+            let dispatchProps = mapDispatchToProps
+            ?mapDispatchToProps(store.dispitch,this.props)
+            :{}
+            this.setState({
+                allProps:{
+                    ...stateProps,
+                    ...dispatchProps,
+                    ...this.props
+                }
+            })
+        }
+        render(){
             return (
-                <WrappedComponent {...stateProps}/>
+                <WrappedComponent {...allProps}/>
             )
         }
     }
